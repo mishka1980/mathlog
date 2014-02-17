@@ -18,10 +18,11 @@ while getopts ":m:vd:" opt; do
         \?)  echo "Invalid option -$OPTARG" >&2
             exit 1 ;;
     esac 
+done 
 
-    if [ ! -e $pathname$date_formatted".tex" ]
-    then
-        # append \input whatever to mathlog.tex
-    fi
+if [ ! -e $pathname$date_formatted".tex" ]
+then
+    # append \input whatever to mathlog.tex
+fi
 
-    vim $pathname$date_formatted".tex"
+vim $pathname$date_formatted".tex"
