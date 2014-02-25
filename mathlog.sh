@@ -1,7 +1,13 @@
 #!/bin/bash
 
 date_formatted=$(date +%Y%m%d)
+sect_name=$(date +%B\ %d,\ %Y)
 pathname=~/Math/mathlog/
+
+function updateMaster {
+    sed -i "s/\%\%\%/\n\\\section{$sect_name}\n\\\input{$date_formatted.tex}\n\%\%\%/g" '/home/ds/Math/mathlog.tex'
+}
+
 
 while getopts ":m:vd:" opt; do
     case $opt in 
@@ -9,7 +15,7 @@ while getopts ":m:vd:" opt; do
             exit 0 ;;
         m) if [ ! -e $pathname$date_formatted".tex" ]
         then
-            # append \input whatever to mathlog.tex
+            updateMaster
         fi
 
         echo $OPTARG >> $pathname$date_formated".tex"
@@ -22,7 +28,7 @@ done
 
 if [ ! -e $pathname$date_formatted".tex" ]
 then
-    # append \input whatever to mathlog.tex
+    updateMaster
 fi
 
 vim $pathname$date_formatted".tex"
