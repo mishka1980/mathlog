@@ -5,8 +5,10 @@ pathname=/home/ds/Math/mathlog
 
 function updateMaster {
     sect_name=$(date -d$date_formatted +%B\ %d,\ %Y) || exit 1
-    sed -i "s/\%\%\%/\n\\\section{$sect_name}\n\\\input{$date_formatted.tex}\n\%\%\%/g" "$pathname/mathlog.tex"
+    sed -i "s|\%\%\%|\n\\\section{$sect_name}\n\\\input{$pathname/$date_formatted.tex}\n\%\%\%|g" "$pathname/mathlog.tex"
     # to change: use absolute filepath. sed is begin finnicky however.
+    # btw: do NOT use commas as a separator in this sed command. It broke everything
+    # and I haven't a clue why
 }
 
 while getopts ":m:vd:c" opt; do
