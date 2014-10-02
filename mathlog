@@ -12,6 +12,7 @@ function updateMaster {
 }
 
 if [ -e $pathname/'.TESTFILE' ]
+then
     echo "Mathlog in use!"
     exit 1
 fi
