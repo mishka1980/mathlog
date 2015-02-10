@@ -17,8 +17,6 @@ then
     exit 1
 fi
 
-echo "a" > $pathname/'.TESTFILE'
-
 while getopts ":m:vd:c" opt; do
     case $opt in 
         d) date_formatted=$OPTARG ;;
@@ -43,10 +41,13 @@ while getopts ":m:vd:c" opt; do
     esac 
 done 
 
+
 if [ ! -e $pathname/$date_formatted'.tex' ]
 then
     updateMaster
 fi
+
+echo "a" > $pathname/'.TESTFILE' # only make TESTFILE if I'm vimming
 
 vim $pathname/$date_formatted'.tex'
 
