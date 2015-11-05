@@ -1,7 +1,12 @@
 #!/bin/bash
 
 date_formatted=$(date +%Y%m%d)
-pathname=/home/ds/Math/mathlog
+# maybe the file should be kept in ~/.mathlog !!!!! there's no reason for
+# the user to actually see it, right?
+pathname=$HOME/Math/mathlog 
+# in that case, the pathname should just be $HOME/.mathlog
+# first check to make sure .mathlog is not a folder. throw an error in that case
+
 
 function updateMaster {
     sect_name=$(date -d$date_formatted +%B\ %d,\ %Y) || exit 1
@@ -17,6 +22,9 @@ then
     exit 1
 fi
 
+# if I'm hiding the directory from the user, I should probably have command
+# that outputs the mathlog file's path, so you can pipe it to scp or whatever.
+# also, instead of evince or vim, use the program listed in your system defaults
 while getopts ":m:vd:c" opt; do
     case $opt in 
         d) date_formatted=$OPTARG ;;
